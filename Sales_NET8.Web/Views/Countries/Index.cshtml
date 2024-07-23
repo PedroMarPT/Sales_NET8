@@ -6,16 +6,16 @@
 @model IEnumerable<Sales_NET8.Web.Entities.Country>
 
 @{
-    ViewData["Title"] = "Countries";
+    ViewData["Title"] = "Países";
 }
 
-<h1>Countries</h1>
+<h1>Países</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Nome</th>
             <th></th>
         </tr>
     </thead>
@@ -26,13 +26,13 @@
                 <td>@country.Id</td>
                 <td>@country.Name</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@country.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@country.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@country.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@country.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@country.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@country.Id">Apagar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a asp-action="Create">Create New</a>
+<a asp-action="Create">Crear Novo</a>
