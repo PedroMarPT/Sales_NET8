@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Sales_NET8.Web.Data;
 using Sales_NET8.Web.Entities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sales_NET8.Web.Controllers
@@ -15,28 +16,9 @@ namespace Sales_NET8.Web.Controllers
             _context = context;
         }
 
-        // GET: Countries
         public async Task<IActionResult> Index()
         {
             return View(await _context.Countries.ToListAsync());
-        }
-
-        // GET: Countries/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var country = await _context.Countries
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (country == null)
-            {
-                return NotFound();
-            }
-
-            return View(country);
         }
 
         // GET: Countries/Create
@@ -48,7 +30,7 @@ namespace Sales_NET8.Web.Controllers
         // POST: Countries/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Create(Country country)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +60,7 @@ namespace Sales_NET8.Web.Controllers
         // POST: Countries/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Edit(int id, Country country)
         {
             if (id != country.Id)
             {
@@ -87,24 +69,28 @@ namespace Sales_NET8.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(country);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CountryExists(country.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.Update(country);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            return View(country);
+        }
+
+        // GET: Countries/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var country = await _context.Countries
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (country == null)
+            {
+                return NotFound();
+            }
+
             return View(country);
         }
 
@@ -136,12 +122,8 @@ namespace Sales_NET8.Web.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private bool CountryExists(int id)
-        {
-            return _context.Countries.Any(e => e.Id == id);
-        }
     }
 }
+
 
 

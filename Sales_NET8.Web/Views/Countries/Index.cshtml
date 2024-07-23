@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Sales_NET8.Web.Entities.Country>
+
+@{
+    ViewData["Title"] = "Countries";
+}
+
+<h1>Countries</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>@country.Id</td>
+                <td>@country.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@country.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@country.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@country.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create">Create New</a>
