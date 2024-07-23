@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sales_NET8.Web.Data.Entities
+namespace Sales_NET8.Web.Entities
 {
     public class Country
     {
@@ -11,5 +11,5 @@ namespace Sales_NET8.Web.Data.Entities
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public string Name { get; set; }
     }
-
 }
+

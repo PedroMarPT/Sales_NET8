@@ -1,8 +1,8 @@
-﻿namespace Sales_NET8.Web.Data
-{
-    using Microsoft.EntityFrameworkCore;
-    using Sales_NET8.Web.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Sales_NET8.Web.Entities;
 
+namespace Sales_NET8.Web.Data
+{
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
@@ -17,5 +17,5 @@
                 .IsUnique();
         }
     }
-
 }
+
